@@ -19,8 +19,8 @@ public class EmpleadoController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmpleadoModel>>> ObtenerEmpleadosAsync()
     {
-        var data = await _empleadoRepositorio.ObtenerEmpleadosAsync();
-        return Ok(data);
+        var empleados = await _empleadoRepositorio.ObtenerEmpleadosAsync();
+        return Ok(empleados);
     }
     
     // MEtodo para obtener un departamento por ID.
@@ -28,10 +28,6 @@ public class EmpleadoController : ControllerBase
     public async Task<ActionResult<EmpleadoModel>> ObtenerEmpleadoPorIdAsync(int id)
     {
         var empleado = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
-        if (empleado == null)
-        {
-            return NotFound(new {message = "Empleado no encontrado"});
-        }
         return Ok(empleado);
     }
     
@@ -39,11 +35,6 @@ public class EmpleadoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Crear([FromBody] EmpleadoModel empleado)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-        
         try
         {
             await _empleadoRepositorio.CrearEmpleadoAsync(empleado);
@@ -59,11 +50,6 @@ public class EmpleadoController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> Actualizar([FromBody] EmpleadoModel empleado)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         try
         {
             await _empleadoRepositorio.ActualizarEmpleadoAsync(empleado);

@@ -19,43 +19,53 @@ public class EmpleadoServicio : IEmpleadoServicio
 
     public async Task<EmpleadoModel> ObtenerEmpleadoPorIdAsync(int id)
     {
-        return await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
+        var empleado = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
+
+        if (empleado is null)
+        {
+            throw new ApplicationException($"El empleado con {id} no existe");
+        }
+        
+        return empleado;
     }
 
     public async Task CrearEmpleadoAsync(EmpleadoModel empleado)
     {
-        var existente = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(empleado.CuiEmpleado);
-        if (existente != null)
-        {
+        var empleadoDb = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(empleado.CuiEmpleado);
+        if (empleadoDb != null)
             throw new ApplicationException("El empleado ya existe");
-        }
+        
+        empleadoDb = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(empleado.CuiEmpleado);
+        if (empleadoDb != null)
+            throw new ApplicationException("El empleado con el cui ingresado ya existe");
+        
         await _empleadoRepositorio.CrearEmpleadoAsync(empleado);
     }
 
     public async Task ActualizarEmpleadoAsync(long id, EmpleadoModel empleado)
     {
-        var existente = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
-        if (existente == null)
+        var empleadoDb = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
+        if (empleadoDb == null)
         {
-            throw new ApplicationException("El empleado no existe");
+            throw new ApplicationException($"El empleado con el cui: {id} no existe");
         }
         var otro = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(empleado.CuiEmpleado);
         if (otro != null && otro.CuiEmpleado != id)
         {
-            throw new ApplicationException("El empleado ya existe");
+            throw new ApplicationException("El empleado con el cui ingresado ya existe");
         }
-        existente.CuiEmpleado = empleado.CuiEmpleado;
-        existente.Nombre = empleado.Nombre;
-        existente.Apellidos = empleado.Apellidos;
-        existente.Telefono = empleado.Telefono;
-        existente.correo = empleado.correo;
-        existente.usuario = empleado.usuario;
-        existente.contrasenya = empleado.contrasenya;
-        existente.Puesto = empleado.Puesto;
-        existente.Salario = empleado.Salario;
-        existente.FechaUltimoAumento = empleado.FechaUltimoAumento;
-        existente.FechaIngreso = empleado.FechaIngreso;
-        existente.FechaBaja = empleado.FechaBaja;
+        /*empleadoDb.CuiEmpleado = empleado.CuiEmpleado;
+        empleadoDb.Nombre = empleado.Nombre;
+        empleadoDb.Apellidos = empleado.Apellidos;
+        empleadoDb.Telefono = empleado.Telefono;
+        empleadoDb.correo = empleado.correo;
+        empleadoDb.usuario = empleado.usuario;
+        empleadoDb.contrasenya = empleado.contrasenya;
+        empleadoDb.Puesto = empleado.Puesto;
+        empleadoDb.Salario = empleado.Salario;
+        empleadoDb.FechaUltimoAumento = empleado.FechaUltimoAumento;
+        empleadoDb.FechaIngreso = empleado.FechaIngreso;
+        empleadoDb.FechaBaja = empleado.FechaBaja;*/
         await _empleadoRepositorio.ActualizarEmpleadoAsync(empleado);
     }
 }
