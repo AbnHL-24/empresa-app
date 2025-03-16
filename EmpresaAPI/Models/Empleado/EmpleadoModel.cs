@@ -48,7 +48,7 @@ public class EmpleadoModel
     public double Salario { get; set; }
     
     [JsonPropertyName("fecha_ultimo_aumento")]
-    public DateOnly? UltimoAumento { get; set; }
+    public DateOnly? FechaUltimoAumento { get; set; }
     
     [Required(ErrorMessage = "La fecha de ingreso es obligatoria")]
     [JsonPropertyName("fecha_ingreso")]

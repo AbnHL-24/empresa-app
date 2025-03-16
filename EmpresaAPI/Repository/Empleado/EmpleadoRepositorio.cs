@@ -18,7 +18,7 @@ public class EmpleadoRepositorio : IEmpleadoRepositorio
         return await _context.Empleados.ToListAsync();
     }
 
-    public async Task<EmpleadoModel> ObtenerEmpleadoAsync(int id)
+    public async Task<EmpleadoModel> ObtenerEmpleadoPorIdAsync(int id)
     {
         return await _context.Empleados.FindAsync(id);
     }
