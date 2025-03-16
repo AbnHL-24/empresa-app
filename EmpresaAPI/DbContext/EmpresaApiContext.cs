@@ -6,9 +6,20 @@ namespace EmpresaAPI.DbContext;
 
 public class EmpresaApiContext : Microsoft.EntityFrameworkCore.DbContext
 {
-    public EmpresaApiContext(DbContextOptions<EmpresaApiContext> options)
+    private string _strinConection;
+    public EmpresaApiContext(DbContextOptions<EmpresaApiContext> options, IConfiguration configuration)
         : base(options)
     {
+        _strinConection = configuration.GetConnectionString("DefaultConnection");
+    }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        /*#warning To protect potentially sensitive information in your connection string, 
+        you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 
+        for guidance on storing connection strings.*/
+     
+            optionsBuilder.UseMySQL(_strinConection);
     }
     
     public DbSet<DepartamentoModel> Departamentos { get; set; }

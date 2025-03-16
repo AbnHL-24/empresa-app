@@ -6,16 +6,12 @@ using EmpresaAPI.Repository.Departamento;
 using EmpresaAPI.Repository.Empleado;
 using EmpresaAPI.Services.Departamento;
 using EmpresaAPI.Services.Empleado;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddDbContext<EmpresaApiContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<EmpresaApiContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
