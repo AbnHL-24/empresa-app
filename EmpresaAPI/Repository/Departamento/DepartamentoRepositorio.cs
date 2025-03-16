@@ -18,9 +18,14 @@ public class DepartamentoRepositorio : IDepartamentoRepositorio
         return await _context.Departamentos.ToListAsync();
     }
 
-    public async Task<DepartamentoModel> ObtenerDepartamentoPorIdAsync(int id)
+    public async Task<DepartamentoModel?> ObtenerDepartamentoPorIdAsync(int id)
     {
         return await _context.Departamentos.FindAsync(id);
+    }
+
+    public async Task<DepartamentoModel?> ObtenerDepartamentoPorNombreAsync(string nombre)
+    {
+        return await _context.Departamentos.FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 
     public async Task CrearAsync(DepartamentoModel departamento)

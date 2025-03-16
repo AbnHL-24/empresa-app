@@ -28,10 +28,6 @@ public class DepartamentoController : ControllerBase
     public async Task<ActionResult<DepartamentoModel>> ObtenerDepartamentoPorIdAsync(int id)
     {
         var departamento = await _departamentoServicio.ObtenerDepartamentoPorIdAsync(id);
-        if (departamento == null)
-        {
-            return NotFound(new {message = "Departamento no encontrado"});
-        }
         return Ok(departamento);
     }
     
@@ -39,17 +35,12 @@ public class DepartamentoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Crear([FromBody] DepartamentoModel departamento)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         try
         {
             await _departamentoServicio.CrearAsync(departamento);
-            return CreatedAtAction(nameof(ObtenerDepartamentoPorIdAsync), new { id = departamento.IdDepartamento }, departamento);
+            return Created();
         }
-        catch (AggregateException e)
+        catch (Exception e)
         {
             return Conflict(new { message = e.Message });
         }
@@ -59,11 +50,6 @@ public class DepartamentoController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> Actualizar(int id, [FromBody] DepartamentoModel departamento)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         try
         {
             await _departamentoServicio.ActualizarAsync(id, departamento);

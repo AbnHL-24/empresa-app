@@ -19,33 +19,37 @@ public class DepartamentoServicio : IDepartamentoServicio
 
     public async Task<DepartamentoModel> ObtenerDepartamentoPorIdAsync(int id)
     {
-        return await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(id);
+        var departamento = await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(id);
+        
+        if (departamento is null)
+            throw new ApplicationException($"El departamento con {id} no existe");
+        
+        return departamento;
     }
 
     public async Task CrearAsync(DepartamentoModel departamento)
     {
-        var existente = await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(departamento.IdDepartamento);
-        if (existente != null)
-        {
-            throw new ApplicationException("El departamento ya existe");
-        }
+        var departamentoDb = await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(departamento.IdDepartamento);
+        if (departamentoDb is not null)
+            throw new ApplicationException("El departamento con el id ingresado ya existe");
+        
+        departamentoDb = await _departamentoRepositorio.ObtenerDepartamentoPorNombreAsync(departamento.Nombre);
+        if (departamentoDb is not null)
+            throw new ApplicationException("El departamento con el nombre ingresado ya existe");
+            
         await _departamentoRepositorio.CrearAsync(departamento);
     }
 
     public async Task ActualizarAsync(int id, DepartamentoModel departamento)
     {
-        var existente = await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(id);
-        if (existente == null)
-        {
-            throw new AggregateException("El departamento no existe");
-        }
-        var otro = await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(departamento.IdDepartamento);
-        if (otro != null && otro.IdDepartamento != id)
-        {
-            throw new ApplicationException("El departamento ya existe");
-        }
-        existente.Nombre = departamento.Nombre;
-        existente.Presupuesto = departamento.Presupuesto;
+        var departamentoDb = await _departamentoRepositorio.ObtenerDepartamentoPorIdAsync(id);
+        if (departamentoDb == null)
+            throw new AggregateException($"El departamento con el id: {id} no existe");
+
+        departamentoDb = await _departamentoRepositorio.ObtenerDepartamentoPorNombreAsync(departamento.Nombre);
+        if (departamentoDb is not null && departamentoDb.IdDepartamento != id)
+            throw new ApplicationException("Ya existe otro departamento con el nombre ingresado");
+        
         await _departamentoRepositorio.ActualizarAsync(departamento);
     }
 }
