@@ -19,9 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\Departamento\" />
       <Folder Include="Controllers\Empleado\" />
-      <Folder Include="Services\Departamento\" />
     </ItemGroup>
 
 </Project>
