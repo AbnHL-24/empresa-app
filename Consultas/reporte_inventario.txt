@@ -67,3 +67,4 @@ ORDER BY total_compras DESC;
 
 Lamentablemente, no me dio tiempo de terminar el dashboard de inventario.
 Aunque tenía planeado crear una serie de consultas y visualizaciones en Metabase para mostrar la información clave
+Adjunto una imagen de lo que se puede realizar con Metabase.
