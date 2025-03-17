@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpresaAPI", "EmpresaAPI\EmpresaAPI.csproj", "{DF24A260-A9D3-4F31-9828-E4AEF8D2D0DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpresaWebApp", "EmpresaWebApp\EmpresaWebApp.csproj", "{8551B7C1-4F9C-49FC-A30F-B8F61C9A3443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{DF24A260-A9D3-4F31-9828-E4AEF8D2D0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF24A260-A9D3-4F31-9828-E4AEF8D2D0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF24A260-A9D3-4F31-9828-E4AEF8D2D0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8551B7C1-4F9C-49FC-A30F-B8F61C9A3443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8551B7C1-4F9C-49FC-A30F-B8F61C9A3443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8551B7C1-4F9C-49FC-A30F-B8F61C9A3443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8551B7C1-4F9C-49FC-A30F-B8F61C9A3443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
