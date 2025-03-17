@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EmpresaWebApp.Models.Departamento.DepartamentoModel>
+
+<h1>Departamentos</h1>
+
+<!-- button for create -->
+<p>
+    <a class="btn btn-primary" asp-action="Create">Crear</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id Departamento</th>
+        <th>Nombre</th>
+        <th>Presupuesto</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDepartamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Presupuesto)
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.IdDepartamento">Editar</a> |
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-action="Actualizar Salario" asp-route-id="@item.IdDepartamento">ActualizarSalario</a> |
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

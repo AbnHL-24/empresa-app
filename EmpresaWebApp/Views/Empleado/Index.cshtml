@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EmpresaWebApp.Models.Empleado.EmpleadoModel>
+
+<h1>Empleados</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Crear</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Correo</th>
+        <th>Telefono</th>
+        <th>Correo</th>
+        <th>Usuario</th>
+        <th>Contraseña</th>
+        <th>Id de puesto</th>
+        <th>Fecha de Ingreso</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var empleado in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.contrasenya)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.Puesto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => empleado.FechaIngreso)
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@empleado.CuiEmpleado">Editar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+    
+</table>
