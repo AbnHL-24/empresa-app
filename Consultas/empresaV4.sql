@@ -1,5 +1,3 @@
--- docker run --name empresa-mysql -e MYSQL_ROOT_PASSWORD=contrasenyaROOT -e MYSQL_DATABASE=empresaDB -e MYSQL_USER=usuarioDB -e MYSQL_PASSWORD=contrasenyaDB -p 3306:3306 -d mysql:latest
-
 -- CREATE DATABASE empresadb;
 USE empresadb;
 

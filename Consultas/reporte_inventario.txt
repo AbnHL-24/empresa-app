@@ -1,0 +1,69 @@
+Para crear los reportes de inventario, erxisten varias herramientas que sirven para creacion de reportes.
+
+PowerBI: Es una herramienta de Microsoft que te permite conectar datos de diferentes fuentes, transformarlos y crear gráficos interactivos.
+Es muy completa y se integra bien con otros productos de Microsoft, pero puede ser un poco compleja si no estás familiarizado con estas herramientas.
+
+Metabase: Es una herramienta sencilla y de código abierto que permite hacer consultas y crear dashboards sin necesidad de ser un experto en programación.
+Es ideal para equipos que quieren acceder a información rápidamente sin complicaciones.
+
+Tableau: Es una de las herramientas más conocidas para visualizar datos. Permite crear gráficos y dashboards muy avanzados y es perfecta para manejar grandes cantidades de información.
+Sin embargo, puede ser costosa y tiene una curva de aprendizaje un poco más alta.
+
+Metabase
+
+De estas opciones decidi implementarlo en metabase, las razones son las siguientes:
+
+Fácil de usar: No necesitas ser un experto en tecnología para usarla. Cualquiera puede hacer consultas y crear gráficos sin escribir mucho código.
+
+Gratuita: Al ser de código abierto, no hay que pagar licencias, lo que la hace muy económica.
+
+Se conecta fácilmente: Metabase se integra sin problemas con bases de datos.
+
+Dashboards sencillos: Permite crear dashboards interactivos que se pueden compartir y actualizar en tiempo real, lo que es perfecto para monitorear el inventario y las ventas.
+
+Con Metabase, podremos crear reportes claros y útiles para tomar decisiones más informadas sobre el inventario y las ventas.
+
+Consultas
+
+Inventario actual
+SELECT sku, descripcion, existencia, precio, costo
+FROM producto
+ORDER BY existencia DESC;
+
+Productos con baja existencia
+SELECT sku, descripcion, existencia
+FROM producto
+WHERE existencia < 10;
+
+Ventas totales por mes
+SELECT DATE_FORMAT(fecha, '%Y-%m') AS mes, SUM(monto) AS total_ventas
+FROM venta
+GROUP BY mes
+ORDER BY mes;
+
+Top 5 productos mas vendidos
+SELECT p.descripcion, SUM(dv.cantidad) AS total_vendido
+FROM detalle_venta dv
+JOIN producto p ON dv.fk_sku = p.sku
+GROUP BY p.descripcion
+ORDER BY total_vendido DESC
+LIMIT 5;
+
+Productos sin ventas
+SELECT p.sku, p.descripcion
+FROM producto p
+LEFT JOIN detalle_venta dv ON p.sku = dv.fk_sku
+WHERE dv.fk_sku IS NULL;
+
+Clientes con mas compras
+SELECT c.nombre, SUM(v.monto) AS total_compras
+FROM venta v
+JOIN cliente c ON v.fk_id_cliente = c.cui
+GROUP BY c.nombre
+ORDER BY total_compras DESC;
+
+
+
+
+Lamentablemente, no me dio tiempo de terminar el dashboard de inventario.
+Aunque tenía planeado crear una serie de consultas y visualizaciones en Metabase para mostrar la información clave
