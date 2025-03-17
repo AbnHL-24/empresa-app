@@ -3,6 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpClient("EmpresaAPI", (serviceProvider, client) =>
+    {
+     client.BaseAddress = new Uri("http://localhost:5284/api/");
+     client.Timeout = TimeSpan.FromSeconds(30);
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
