@@ -11,13 +11,17 @@
     <tr>
         <th>Nombre</th>
         <th>Apellidos</th>
-        <th>Correo</th>
         <th>Telefono</th>
         <th>Correo</th>
         <th>Usuario</th>
         <th>Contraseña</th>
         <th>Id de puesto</th>
-        <th>Fecha de Ingreso</th>
+        <th>Salario</th>
+        <th>Fecha de ultimo aumento</th>
+        <th>Fecha de ingreso</th>
+        <th>Fecha de baja</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -46,11 +50,24 @@
                 @Html.DisplayFor(modelItem => empleado.Puesto)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => empleado.Salario)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => empleado.FechaUltimoAumento)
+            <td>
                 @Html.DisplayFor(modelItem => empleado.FechaIngreso)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => empleado.FechaBaja)
+            <td>
+                
             </td>
             <td>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@empleado.CuiEmpleado">Editar</a>
             </td>
+            @*<td>
+                <a class="btn btn-warning" asp-action="Actualizar Salario" asp-route-id="@empleado.CuiEmpleado">ActualizarSalario</a> |
+            </td>*@
         </tr>
     }
     </tbody>

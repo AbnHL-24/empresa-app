@@ -10,5 +10,62 @@
 <form asp-action="Edit" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="CuiEmpleado"/>
-    
+    <div class="form-group">
+        <label asp-for="Nombre" class="control-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Apellidos" class="control-label"></label>
+        <input asp-for="Apellidos" class="form-control" />
+        <span asp-validation-for="Apellidos" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Telefono" class="control-label"></label>
+        <input asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="correo" class="control-label"></label>
+        <input asp-for="correo" class="form-control" />
+        <span asp-validation-for="correo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="usuario" class="control-label"></label>
+        <input asp-for="usuario" class="form-control" />
+        <span asp-validation-for="usuario" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="contrasenya" class="control-label"></label>
+        <input asp-for="contrasenya" class="form-control" />
+        <span asp-validation-for="contrasenya" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Puesto" class="control-label"></label>
+        <input asp-for="Puesto" class="form-control" />
+        <span asp-validation-for="Puesto" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Salario" class="control-label"></label>
+        <input asp-for="Salario" class="form-control" />
+        <span asp-validation-for="Salario" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FechaUltimoAumento" class="control-label"></label>
+        <input asp-for="FechaUltimoAumento" class="form-control" />
+        <span asp-validation-for="FechaUltimoAumento" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FechaIngreso" class="control-label"></label>
+        <input asp-for="FechaIngreso" class="form-control" />
+        <span asp-validation-for="FechaIngreso" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FechaBaja" class="control-label"></label>
+        <input asp-for="FechaBaja" class="form-control" />
+        <span asp-validation-for="FechaBaja" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Actualizar" class="btn btn-primary" />
+    </div>
 </form>
