@@ -1,25 +1,26 @@
 ﻿using EmpresaAPI.Models.Empleado;
 using EmpresaAPI.Repository.Empleado;
+using EmpresaAPI.Services.Empleado;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmpresaAPI.Controllers.Empleado;
 
-[Route("ape/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class EmpleadoController : ControllerBase
 {
-    private readonly IEmpleadoRepositorio _empleadoRepositorio;
+    private readonly IEmpleadoServicio _empleadoServicio;
     
-    public EmpleadoController(IEmpleadoRepositorio empleadoRepositorio)
+    public EmpleadoController(IEmpleadoServicio empleadoServicio)
     {
-        _empleadoRepositorio = empleadoRepositorio;
+        _empleadoServicio = empleadoServicio;
     }
     
     // Metodo para obtener todos los empleados.
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmpleadoModel>>> ObtenerEmpleadosAsync()
     {
-        var empleados = await _empleadoRepositorio.ObtenerEmpleadosAsync();
+        var empleados = await _empleadoServicio.ObtenerEmpleadosAsync();
         return Ok(empleados);
     }
     
@@ -27,7 +28,7 @@ public class EmpleadoController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<EmpleadoModel>> ObtenerEmpleadoPorIdAsync(int id)
     {
-        var empleado = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
+        var empleado = await _empleadoServicio.ObtenerEmpleadoPorIdAsync(id);
         return Ok(empleado);
     }
     
@@ -37,7 +38,7 @@ public class EmpleadoController : ControllerBase
     {
         try
         {
-            await _empleadoRepositorio.CrearEmpleadoAsync(empleado);
+            await _empleadoServicio.CrearEmpleadoAsync(empleado);
             return CreatedAtAction(nameof(ObtenerEmpleadoPorIdAsync), new { id = empleado.CuiEmpleado }, empleado);
         }
         catch (Exception e)
@@ -48,11 +49,25 @@ public class EmpleadoController : ControllerBase
     
     // Medoto para actualizar un departamento existente
     [HttpPut("{id}")]
-    public async Task<ActionResult> Actualizar([FromBody] EmpleadoModel empleado)
+    public async Task<ActionResult> Actualizar(long id, [FromBody] EmpleadoModel empleado)
     {
         try
         {
-            await _empleadoRepositorio.ActualizarEmpleadoAsync(empleado);
+            await _empleadoServicio.ActualizarEmpleadoAsync(id, empleado);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return NotFound(new {message = e.Message});
+        }
+    }
+
+    [HttpPut("{id}?porcentaje={porcentaje}")]
+    public async Task<ActionResult> ActualizarSalario(long id, int porcentaje, [FromBody] EmpleadoModel empleado)
+    {
+        try
+        {
+            await _empleadoServicio.ActualizarSalarioAsync(id, porcentaje, empleado);
             return NoContent();
         }
         catch (Exception e)

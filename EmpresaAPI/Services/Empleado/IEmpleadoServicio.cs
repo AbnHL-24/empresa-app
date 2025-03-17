@@ -8,4 +8,5 @@ public interface IEmpleadoServicio
     Task<EmpleadoModel> ObtenerEmpleadoPorIdAsync(int id);
     Task CrearEmpleadoAsync(EmpleadoModel empleado);
     Task ActualizarEmpleadoAsync(long id, EmpleadoModel empleado);
+    Task ActualizarSalarioAsync(long id, int porcentaje, EmpleadoModel empleado);
 }

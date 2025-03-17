@@ -1,4 +1,5 @@
-﻿using EmpresaAPI.Models.Departamento;
+﻿using EmpresaAPI.Models.AumentoSalario;
+using EmpresaAPI.Models.Departamento;
 using EmpresaAPI.Models.Empleado;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,4 +25,5 @@ public class EmpresaApiContext : Microsoft.EntityFrameworkCore.DbContext
     
     public DbSet<DepartamentoModel> Departamentos { get; set; }
     public DbSet<EmpleadoModel> Empleados { get; set; }
+    public DbSet<AumentoSalarioModel> AumentoSalario { get; set; }
 }

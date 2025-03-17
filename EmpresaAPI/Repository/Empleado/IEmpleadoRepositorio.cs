@@ -1,4 +1,5 @@
-﻿using EmpresaAPI.Models.Empleado;
+﻿using EmpresaAPI.Models.AumentoSalario;
+using EmpresaAPI.Models.Empleado;
 
 namespace EmpresaAPI.Repository.Empleado;
 

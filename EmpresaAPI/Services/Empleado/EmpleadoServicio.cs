@@ -1,4 +1,7 @@
-﻿using EmpresaAPI.Models.Empleado;
+﻿using System.Runtime.InteropServices.JavaScript;
+using EmpresaAPI.Models.AumentoSalario;
+using EmpresaAPI.Models.Empleado;
+using EmpresaAPI.Repository.AumentoSalario;
 using EmpresaAPI.Repository.Empleado;
 
 namespace EmpresaAPI.Services.Empleado;
@@ -6,10 +9,12 @@ namespace EmpresaAPI.Services.Empleado;
 public class EmpleadoServicio : IEmpleadoServicio
 {
     private readonly IEmpleadoRepositorio _empleadoRepositorio;
+    private readonly IAumentoSalario _aumentoSalario;
     
-    public EmpleadoServicio(IEmpleadoRepositorio empleadoRepositorio)
+    public EmpleadoServicio(IEmpleadoRepositorio empleadoRepositorio, IAumentoSalario aumentoSalario)
     {
         _empleadoRepositorio = empleadoRepositorio;
+        _aumentoSalario = aumentoSalario;
     }
     
     public async Task<IEnumerable<EmpleadoModel>> ObtenerEmpleadosAsync()
@@ -67,5 +72,26 @@ public class EmpleadoServicio : IEmpleadoServicio
         empleadoDb.FechaIngreso = empleado.FechaIngreso;
         empleadoDb.FechaBaja = empleado.FechaBaja;*/
         await _empleadoRepositorio.ActualizarEmpleadoAsync(empleado);
+    }
+
+    public async Task ActualizarSalarioAsync(long id, int porcentaje, EmpleadoModel empleado)
+    {
+        var empleadoDb = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(id);
+        if (empleadoDb == null)
+        {
+            throw new ApplicationException($"El empleado con el cui: {id} no existe");
+        }
+        var otro = await _empleadoRepositorio.ObtenerEmpleadoPorIdAsync(empleado.CuiEmpleado);
+        if (otro != null && otro.CuiEmpleado != id)
+        {
+            throw new ApplicationException("El empleado con el cui ingresado ya existe");
+        }
+        double salarioAnterior = empleadoDb.Salario;
+        double nuevoSalario = empleadoDb.Salario + (empleadoDb.Salario * (porcentaje / 100));
+        var fechaActual = DateOnly.FromDateTime(DateTime.Now);
+        empleadoDb.Salario = nuevoSalario;
+        AumentoSalarioModel aumentoSalario = new AumentoSalarioModel(id, nuevoSalario, porcentaje, fechaActual);
+        await _empleadoRepositorio.ActualizarEmpleadoAsync(empleadoDb);
+        await _aumentoSalario.CrearAumentoSalario(aumentoSalario);
     }
 }

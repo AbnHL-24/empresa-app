@@ -43,7 +43,7 @@ public class EmpleadoModel
     public int Puesto { get; set; }
     
     [Required(ErrorMessage = "El departamento es obligatorio")]
-    [Range(0, int.MaxValue, ErrorMessage = "El departamento debe corresponder a un numero positivo")]
+    [Range(0, double.MaxValue, ErrorMessage = "El departamento debe corresponder a un numero positivo")]
     [JsonPropertyName("salario")]
     public double Salario { get; set; }
     
