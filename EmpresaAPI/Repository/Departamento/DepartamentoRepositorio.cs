@@ -36,10 +36,9 @@ public class DepartamentoRepositorio : IDepartamentoRepositorio
 
     public async Task ActualizarAsync(DepartamentoModel departamento)
     {
-        
-        _context.Departamentos.Update(departamento);
+        var departamento2 = await _context.Departamentos.FindAsync(departamento.IdDepartamento);
+        departamento2.Nombre = departamento.Nombre;
+        departamento2.Presupuesto = departamento.Presupuesto;
         await _context.SaveChangesAsync();
-        /*_context.Entry(departamento).State = EntityState.Modified;
-        return await _context.SaveChangesAsync() > 0;*/
     }
 }

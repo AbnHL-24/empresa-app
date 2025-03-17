@@ -49,7 +49,7 @@ public class DepartamentoServicio : IDepartamentoServicio
         departamentoDb = await _departamentoRepositorio.ObtenerDepartamentoPorNombreAsync(departamento.Nombre);
         if (departamentoDb is not null && departamentoDb.IdDepartamento != id)
             throw new ApplicationException("Ya existe otro departamento con el nombre ingresado");
-        
+        departamento.IdDepartamento = id;
         await _departamentoRepositorio.ActualizarAsync(departamento);
         /*var exito = await _departamentoRepositorio.ActualizarAsync(departamento);
         Console.WriteLine(exito);*/
