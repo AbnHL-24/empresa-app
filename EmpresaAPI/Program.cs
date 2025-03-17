@@ -2,6 +2,7 @@ using EmpresaAPI.DbContext;
 using Microsoft.EntityFrameworkCore;
 //using Microsoft.EntityFrameworkCore.Design;
 using EmpresaAPI.Models.Departamento;
+using EmpresaAPI.Repository.AumentoSalario;
 using EmpresaAPI.Repository.Departamento;
 using EmpresaAPI.Repository.Empleado;
 using EmpresaAPI.Services.Departamento;
@@ -21,6 +22,7 @@ builder.Services.AddScoped<IDepartamentoRepositorio, DepartamentoRepositorio>();
 builder.Services.AddScoped<IEmpleadoRepositorio, EmpleadoRepositorio>();
 builder.Services.AddScoped<IDepartamentoServicio, DepartamentoServicio>();
 builder.Services.AddScoped<IEmpleadoServicio, EmpleadoServicio>();
+builder.Services.AddScoped<IAumentoSalarioRepositorio, AumentoSalarioRepositorioRepositorio>();
 /*builder.Services.AddTransient<IDepartamentoServicio, DepartamentoServicio>();
 builder.Services.AddTransient<IEmpleadoServicio, EmpleadoServicio>();*/
 

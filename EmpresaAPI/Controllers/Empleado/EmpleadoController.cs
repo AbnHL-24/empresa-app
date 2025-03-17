@@ -62,8 +62,8 @@ public class EmpleadoController : ControllerBase
         }
     }
 
-    [HttpPut("{id}?porcentaje={porcentaje}")]
-    public async Task<ActionResult> ActualizarSalario(long id, int porcentaje, [FromBody] EmpleadoModel empleado)
+    [HttpPut("{id}/aumento")]
+    public async Task<ActionResult> ActualizarSalario(long id,[FromQuery] int porcentaje, [FromBody] EmpleadoModel empleado)
     {
         try
         {

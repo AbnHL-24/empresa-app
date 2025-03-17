@@ -5,7 +5,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient("EmpresaAPI", (serviceProvider, client) =>
     {
-     client.BaseAddress = new Uri("http://localhost:5284/api/");
+     client.BaseAddress = new Uri("https://localhost:7247/api/");
      client.Timeout = TimeSpan.FromSeconds(30);
     });
 

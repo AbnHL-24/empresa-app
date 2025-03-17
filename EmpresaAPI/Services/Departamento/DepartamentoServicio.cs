@@ -51,5 +51,7 @@ public class DepartamentoServicio : IDepartamentoServicio
             throw new ApplicationException("Ya existe otro departamento con el nombre ingresado");
         
         await _departamentoRepositorio.ActualizarAsync(departamento);
+        /*var exito = await _departamentoRepositorio.ActualizarAsync(departamento);
+        Console.WriteLine(exito);*/
     }
 }

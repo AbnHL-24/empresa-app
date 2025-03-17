@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmpresaAPI.Repository.AumentoSalario;
 
-public class AumentoSalario : IAumentoSalario
+public class AumentoSalarioRepositorioRepositorio : IAumentoSalarioRepositorio
 {
     private readonly EmpresaApiContext _context;
 
-    public AumentoSalario(EmpresaApiContext context)
+    public AumentoSalarioRepositorioRepositorio(EmpresaApiContext context)
     {
         _context = context;
     }

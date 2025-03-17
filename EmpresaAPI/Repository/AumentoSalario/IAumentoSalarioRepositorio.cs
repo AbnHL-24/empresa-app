@@ -2,7 +2,7 @@
 
 namespace EmpresaAPI.Repository.AumentoSalario;
 
-public interface IAumentoSalario
+public interface IAumentoSalarioRepositorio
 {
     Task CrearAumentoSalario(AumentoSalarioModel aumentoSalario);
 }

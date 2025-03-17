@@ -9,12 +9,12 @@ namespace EmpresaAPI.Services.Empleado;
 public class EmpleadoServicio : IEmpleadoServicio
 {
     private readonly IEmpleadoRepositorio _empleadoRepositorio;
-    private readonly IAumentoSalario _aumentoSalario;
+    private readonly IAumentoSalarioRepositorio _aumentoSalarioRepositorio;
     
-    public EmpleadoServicio(IEmpleadoRepositorio empleadoRepositorio, IAumentoSalario aumentoSalario)
+    public EmpleadoServicio(IEmpleadoRepositorio empleadoRepositorio, IAumentoSalarioRepositorio aumentoSalarioRepositorio)
     {
         _empleadoRepositorio = empleadoRepositorio;
-        _aumentoSalario = aumentoSalario;
+        _aumentoSalarioRepositorio = aumentoSalarioRepositorio;
     }
     
     public async Task<IEnumerable<EmpleadoModel>> ObtenerEmpleadosAsync()
@@ -92,6 +92,6 @@ public class EmpleadoServicio : IEmpleadoServicio
         empleadoDb.Salario = nuevoSalario;
         AumentoSalarioModel aumentoSalario = new AumentoSalarioModel(id, nuevoSalario, porcentaje, fechaActual);
         await _empleadoRepositorio.ActualizarEmpleadoAsync(empleadoDb);
-        await _aumentoSalario.CrearAumentoSalario(aumentoSalario);
+        await _aumentoSalarioRepositorio.CrearAumentoSalario(aumentoSalario);
     }
 }
